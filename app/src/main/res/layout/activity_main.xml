@@ -12,6 +12,7 @@
         android:id="@+id/progress"
         app:isShowText="true"
         app:textSize="20sp"
+        android:visibility="gone"
         app:max="100"
         app:roundProgressColor="#00a854"
         app:roundWidth="15dp"
@@ -21,6 +22,7 @@
         android:id="@+id/reset"
         android:text="重置"
         android:padding="16dp"
+        android:visibility="gone"
         android:gravity="center"
         android:background="#ffffff"
         android:layout_width="match_parent"
@@ -37,6 +39,6 @@
         app:circleStrokeWidth="10dp"
         app:lineColor1="#f43212"
         app:lineColor2="#434343"
-        android:layout_width="400dp"
-        android:layout_height="400dp" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>

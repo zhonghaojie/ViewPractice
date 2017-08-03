@@ -62,6 +62,7 @@ class Clock(context: Context?, attrs: AttributeSet?, defStyleAttr: Int, defStyle
             secondHandLength=it.getDimension(R.styleable.Clock_secondHandLength,40f)
             hourHandLenght=it.getDimension(R.styleable.Clock_hourHandLength,20f)
 
+            paintCircle.isAntiAlias=true
             paintCircle.style=Paint.Style.STROKE
             paintCircle.strokeWidth=circleStrokeWidth
             paintCircle.color=circleColor
