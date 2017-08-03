@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="RoundProgress">
+        <attr name="roundColor" format="color"/>
+        <attr name="roundProgressColor" format="color"/>
+        <attr name="roundWidth" format="dimension"/>
+        <attr name="textColor" format="color"/>
+        <attr name="textSize" format="dimension"/>
+        <attr name="max" format="integer"/>
+        <attr name="isShowText" format="boolean"/>
+        <attr name="style">
+            <enum name="STROKE" value="0"/>
+            <enum name="FILL" value="1"/>
+        </attr>
+    </declare-styleable>
+
+
+    <declare-styleable name="Clock">
+        <attr name="minuteHandColor" format="color"/>
+        <attr name="secondHandColor" format="color"/>
+        <attr name="hourHandColor" format="color"/>
+        <attr name="hourHandWidth" format="dimension"/>
+        <attr name="minuteHandWidth" format="dimension"/>
+        <attr name="secondHandWidth" format="dimension"/>
+        <attr name="hourHandLength" format="dimension"/>
+        <attr name="minuteHandLength" format="dimension"/>
+        <attr name="secondHandLength" format="dimension"/>
+        <attr name="circleColor" format="color"/>
+        <attr name="lineWidth1" format="dimension"/>
+        <attr name="lineWidth2" format="dimension"/>
+        <attr name="lineColor1" format="color"/>
+        <attr name="lineColor2" format="color"/>
+        <attr name="circleStrokeWidth" format="dimension"/>
+        <attr name="hourLineLength" format="dimension"/>
+        <attr name="secondLineLength" format="dimension"/>
+    </declare-styleable>
+
+</resources>
