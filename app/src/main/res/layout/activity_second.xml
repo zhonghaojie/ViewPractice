@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.nhsoft.view.SecondActivity">
+    <com.nhsoft.view.widget.Clock
+        android:id="@+id/clock"
+        android:padding="20dp"
+        app:circleColor="#434343"
+        app:hourLineLength="30dp"
+        app:hourHandLength="60dp"
+        app:secondLineLength="15dp"
+        app:secondHandLength="120dp"
+        app:minuteHandLength="100dp"
+        app:lineWidth1="5dp"
+        app:lineWidth2="3dp"
+        app:circleStrokeWidth="10dp"
+        app:lineColor1="#f43212"
+        app:lineColor2="#434343"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

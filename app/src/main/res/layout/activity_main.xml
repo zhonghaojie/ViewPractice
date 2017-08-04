@@ -7,46 +7,19 @@
     android:orientation="vertical"
     tools:context="com.nhsoft.view.MainActivity">
 
-    <com.nhsoft.view.RoundProgress
+    <com.nhsoft.view.widget.RoundProgress
         android:layout_gravity="center"
         android:id="@+id/progress"
         app:isShowText="true"
         app:textSize="20sp"
-        android:visibility="gone"
         app:max="100"
         app:roundProgressColor="#00a854"
         app:roundWidth="15dp"
         android:layout_width="300dp"
         android:layout_height="300dp" />
-    <TextView
-        android:id="@+id/reset"
-        android:text="重置"
-        android:padding="16dp"
-        android:visibility="gone"
-        android:gravity="center"
-        android:background="#ffffff"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <com.nhsoft.view.Clock
-        android:id="@+id/clock"
-        android:padding="20dp"
-        app:circleColor="#434343"
-        app:hourLineLength="30dp"
-        app:hourHandLength="60dp"
-        app:secondLineLength="15dp"
-        app:secondHandLength="120dp"
-        app:minuteHandLength="100dp"
-        app:lineWidth1="5dp"
-        app:lineWidth2="3dp"
-        app:circleStrokeWidth="10dp"
-        app:lineColor1="#f43212"
-        app:lineColor2="#434343"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-    <ToggleButton
-        android:id="@+id/toggle"
-        android:textOn="开始"
-        android:textOff="暂停"
+    <Button
+        android:id="@+id/next"
+        android:text="下一个"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

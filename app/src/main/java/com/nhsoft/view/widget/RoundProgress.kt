@@ -1,4 +1,4 @@
-package com.nhsoft.view
+package com.nhsoft.view.widget
 
 import android.content.Context
 import android.graphics.Canvas
@@ -7,6 +7,7 @@ import android.graphics.DashPathEffect
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
+import com.nhsoft.view.R
 
 /**
  * Created by zhonghaojie on 2017-07-27.
@@ -14,25 +15,25 @@ import android.view.View
 class RoundProgress(context: Context?, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : View(context, attrs, defStyleAttr, defStyleRes) {
 
 
-    private var roundColor:Int=Color.parseColor("#c1c1c1")
-    private var roundProgressColor:Int=Color.parseColor("#212121")
+    private var roundColor:Int= Color.parseColor("#c1c1c1")
+    private var roundProgressColor:Int= Color.parseColor("#212121")
     private var roundWidth=20f
-    private var textColor:Int=Color.parseColor("#f04134")
+    private var textColor:Int= Color.parseColor("#f04134")
     private var textSize=22f
     private var max=100
     private var isShowText=true
     private var style=0
-    private val paint=Paint()
+    private val paint= Paint()
     private var progress=0
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int):this(context,attrs,defStyleAttr,0)
     constructor(context: Context?):this(context,null,0,0)
     constructor(context: Context?, attrs: AttributeSet?):this(context,attrs,0,0){
-        val typedArray=context?.obtainStyledAttributes(attrs,R.styleable.RoundProgress)
+        val typedArray=context?.obtainStyledAttributes(attrs, R.styleable.RoundProgress)
         typedArray?.let {
-            roundColor=it.getColor(R.styleable.RoundProgress_roundColor,Color.parseColor("#c1c1c1"))
-            roundProgressColor=it.getColor(R.styleable.RoundProgress_roundProgressColor,Color.parseColor("#212121"))
+            roundColor=it.getColor(R.styleable.RoundProgress_roundColor, Color.parseColor("#c1c1c1"))
+            roundProgressColor=it.getColor(R.styleable.RoundProgress_roundProgressColor, Color.parseColor("#212121"))
             roundWidth=it.getDimension(R.styleable.RoundProgress_roundWidth,5f)
-            textColor=it.getColor(R.styleable.RoundProgress_textColor,Color.parseColor("#f04134"))
+            textColor=it.getColor(R.styleable.RoundProgress_textColor, Color.parseColor("#f04134"))
             textSize=it.getDimension(R.styleable.RoundProgress_textSize,22f)
             max=it.getInt(R.styleable.RoundProgress_max,100)
             isShowText=it.getBoolean(R.styleable.RoundProgress_isShowText,true)
@@ -47,19 +48,19 @@ class RoundProgress(context: Context?, attrs: AttributeSet?, defStyleAttr: Int, 
         canvas?.let {
             paint.isAntiAlias=true
             //画圆
-            paint.style=Paint.Style.STROKE
+            paint.style= Paint.Style.STROKE
             paint.strokeWidth= roundWidth
             paint.color=roundColor
             val center=width/2f
             val radius=center - roundWidth/2
-            val pathEffect=DashPathEffect(floatArrayOf(10f,5f),0f)
+            val pathEffect= DashPathEffect(floatArrayOf(10f,5f),0f)
             paint.pathEffect=pathEffect
             it.drawCircle(center,center,radius,paint)
             paint.pathEffect=null
             if(isShowText){
                 //画字
                 paint.strokeWidth=0f
-                paint.setShadowLayer(3f,3f,3f,Color.parseColor("#212121"))
+                paint.setShadowLayer(3f,3f,3f, Color.parseColor("#212121"))
                 paint.textSize= textSize
                 paint.color=textColor
                 val textWidth=paint.measureText(progress.toString())
