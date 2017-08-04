@@ -124,6 +124,7 @@ class Clock(context: Context?, attrs: AttributeSet?, defStyleAttr: Int, defStyle
 
     override fun onDraw(canvas: Canvas?) {
         canvas?.let {
+            super.onDraw(it)
             it.drawCircle(radius,radius,radius-paddingLeft,paintCircle)
             it.save()
             it.drawLine(radius,paddingTop+hourLineLength,radius,paddingTop.toFloat()+paintHourLine.strokeWidth,paintHourLine)
@@ -141,7 +142,7 @@ class Clock(context: Context?, attrs: AttributeSet?, defStyleAttr: Int, defStyle
                 it.restore()
                 it.save()
             }
-            var angle:Int=getHour()*30
+            var angle:Int=getHour()*30+getMinute()/2
             Log.i("time","hour ${getHour()}  angle  $angle")
             it.drawLine(radius,radius,caculateX(angle,hourHandLenght.toInt()),caculateY(angle,hourHandLenght.toInt()),paintHour)
             angle=getMinute()*6
