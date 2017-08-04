@@ -2,11 +2,15 @@ package com.nhsoft.view
 
 import android.content.Context
 import android.content.res.TypedArray
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
+import android.graphics.*
+import android.os.Handler
+import android.os.Looper
+import android.os.Message
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
+import java.util.*
+
 
 /**
  * Created by zhonghaojie on 2017-08-03.
@@ -14,14 +18,12 @@ import android.view.View
 class Clock(context: Context?, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : View(context, attrs, defStyleAttr, defStyleRes) {
 
     var minuteHandColor:Int=Color.BLACK
-    var minuteHandWidth:Float=7f
     var minuteHandLength=30f
     var secondHandColor:Int=Color.BLACK
     var secondHandWidth:Float=4f
     var secondHandLength=40f
     var hourHandColor:Int=Color.BLACK
     var hourHandLenght=20f
-    var hourHandWidth:Float=10f
     var circleColor:Int=Color.BLACK
     var radius:Float=200f
     var lineWidth1:Float=20f
@@ -39,6 +41,16 @@ class Clock(context: Context?, attrs: AttributeSet?, defStyleAttr: Int, defStyle
     val paintMinute=Paint()
     val paintSecond=Paint()
 
+    private val handler = object : Handler(Looper.getMainLooper()) {
+        override fun handleMessage(msg: Message) {
+            super.handleMessage(msg)
+            if (msg.what == 0) {
+                invalidate()
+            }
+        }
+    }
+
+
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int):this(context,attrs,defStyleAttr,0)
     constructor(context: Context?):this(context,null,0,0)
     constructor(context: Context?, attrs: AttributeSet?):this(context,attrs,0,0){
@@ -55,9 +67,7 @@ class Clock(context: Context?, attrs: AttributeSet?, defStyleAttr: Int, defStyle
             hourLineLength=it.getDimension(R.styleable.Clock_hourLineLength,30f)
             circleStrokeWidth=it.getDimension(R.styleable.Clock_circleStrokeWidth,20f)
             secondLineLength =it.getDimension(R.styleable.Clock_secondLineLength,15f)
-            minuteHandWidth=it.getDimension(R.styleable.Clock_minuteHandWidth,7f)
             secondHandWidth=it.getDimension(R.styleable.Clock_secondHandWidth,4f)
-            hourHandWidth=it.getDimension(R.styleable.Clock_hourHandWidth,10f)
             minuteHandLength=it.getDimension(R.styleable.Clock_minuteHandLength,30f)
             secondHandLength=it.getDimension(R.styleable.Clock_secondHandLength,40f)
             hourHandLenght=it.getDimension(R.styleable.Clock_hourHandLength,20f)
@@ -75,19 +85,24 @@ class Clock(context: Context?, attrs: AttributeSet?, defStyleAttr: Int, defStyle
             paintSecondLine.color=lineColor2
             paintSecondLine.strokeWidth=lineWidth2
 
+            val pathEffect1= DashPathEffect(floatArrayOf(10f,5f),4f)
+            val pathEffect2= DiscretePathEffect(5f,10f)
             paintHour.style=Paint.Style.FILL
             paintHour.color=hourHandColor
-            paintHour.setShadowLayer(4f,4f,4f,Color.parseColor("#212112"))
-            paintHour.strokeWidth=hourHandWidth
+            paintHour.pathEffect= ComposePathEffect(pathEffect1,pathEffect2)
+            paintHour.setShadowLayer(4f,4f,3f,Color.parseColor("#212112"))
+            paintHour.strokeWidth=lineWidth1
 
             paintMinute.style=Paint.Style.FILL
             paintMinute.color=minuteHandColor
-            paintMinute.setShadowLayer(4f,4f,4f,Color.parseColor("#212112"))
-            paintMinute.strokeWidth=minuteHandWidth
+            paintMinute.pathEffect= ComposePathEffect(pathEffect1,pathEffect2)
+            paintMinute.setShadowLayer(4f,4f,5f,Color.parseColor("#212112"))
+            paintMinute.strokeWidth=lineWidth2
 
             paintSecond.style=Paint.Style.FILL
             paintSecond.color=secondHandColor
-            paintSecond.setShadowLayer(4f,4f,4f,Color.parseColor("#212112"))
+            paintSecond.pathEffect= ComposePathEffect(pathEffect1,pathEffect2)
+            paintSecond.setShadowLayer(4f,4f,7f,Color.parseColor("#212112"))
             paintSecond.strokeWidth=secondHandWidth
             it.recycle()
         }
@@ -111,7 +126,6 @@ class Clock(context: Context?, attrs: AttributeSet?, defStyleAttr: Int, defStyle
         canvas?.let {
             it.drawCircle(radius,radius,radius-paddingLeft,paintCircle)
             it.save()
-
             it.drawLine(radius,paddingTop+hourLineLength,radius,paddingTop.toFloat()+paintHourLine.strokeWidth,paintHourLine)
             for(angle in 0..360 step 6){
                 it.rotate(angle.toFloat(),radius,radius)
@@ -127,10 +141,42 @@ class Clock(context: Context?, attrs: AttributeSet?, defStyleAttr: Int, defStyle
                 it.restore()
                 it.save()
             }
-            val hourLine=radius-hourHandLenght
-
-            it.drawLine(radius,radius,radius,hourLine,paintHour)
+            var angle:Int=getHour()*30
+            Log.i("time","hour ${getHour()}  angle  $angle")
+            it.drawLine(radius,radius,caculateX(angle,hourHandLenght.toInt()),caculateY(angle,hourHandLenght.toInt()),paintHour)
+            angle=getMinute()*6
+            Log.i("time","minute ${getMinute()}  angle  $angle")
+            it.drawLine(radius,radius,caculateX(angle,minuteHandLength.toInt()),caculateY(angle,minuteHandLength.toInt()),paintMinute)
+            angle=getSecond()*6
+            Log.i("time","second ${getSecond()}  angle  $angle")
+            it.drawLine(radius,radius,caculateX(angle,secondHandLength.toInt()),caculateY(angle,secondHandLength.toInt()),paintSecond)
+            handler.sendEmptyMessageDelayed(0,200)
         }
+    }
+
+    private fun getHour():Int{
+        val calendar:Calendar= Calendar.getInstance()
+        return calendar.get(Calendar.HOUR)
+    }
+    private fun getMinute():Int{
+        val calendar:Calendar= Calendar.getInstance()
+        return calendar.get(Calendar.MINUTE)
+    }
+
+    private fun getSecond():Int{
+        val calendar:Calendar= Calendar.getInstance()
+        return calendar.get(Calendar.SECOND)
+    }
+
+    private fun caculateX(angle:Int,length:Int):Float{
+        val x=radius+length.times(Math.sin(angle.toDouble()*Math.PI/180)).toFloat()
+        Log.i("position","x $x")
+        return x
+    }
+    private fun caculateY(angle:Int,length:Int):Float{
+        val y=radius-length.times(Math.cos(angle.toDouble()*Math.PI/180)).toFloat()
+        Log.i("position","y $y")
+        return y
     }
 }
 
