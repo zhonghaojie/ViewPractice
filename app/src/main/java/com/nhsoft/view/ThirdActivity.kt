@@ -6,13 +6,16 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.startActivity
 
-class SecondActivity : AppCompatActivity() {
+class ThirdActivity : AppCompatActivity() {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_second)
+        setContentView(R.layout.activity_third)
         next.onClick {
-            startActivity<ThirdActivity>()
+            startActivity<ForthActivity>()
         }
+
     }
+
 }
