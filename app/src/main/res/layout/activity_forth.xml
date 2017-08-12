@@ -8,10 +8,18 @@
     tools:context="com.nhsoft.view.ForthActivity">
     <com.nhsoft.view.widget.VoiceView
         android:id="@+id/voice"
+        app:circleStrokeWidth="10dp"
+        app:centerImg="@drawable/batman"
+        app:dotCount="11"
+        app:splitWidth="30dp"
+        app:radius="100dp"
+        app:imgScale="half"
+        android:layout_gravity="center"
         android:layout_width="300dp"
         android:layout_height="300dp" />
     <android.support.v7.widget.AppCompatSeekBar
         android:id="@+id/seekbar"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>
