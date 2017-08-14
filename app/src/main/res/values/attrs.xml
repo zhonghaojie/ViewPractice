@@ -58,5 +58,8 @@
             <enum name="normal" value="1"/>
             <enum name="half" value="2"/>
         </attr>
+        <attr name="bgCorner" format="dimension"/>
+        <attr name="bgColor" format="color"/>
+        <attr name="fillColor" format="color"/>
     </declare-styleable>
 </resources>

@@ -5,18 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.nhsoft.view.ForthActivity">
+    tools:context="com.nhsoft.view.FourthActivity">
     <com.nhsoft.view.widget.VoiceView
         android:id="@+id/voice"
-        app:circleStrokeWidth="10dp"
-        app:centerImg="@drawable/batman"
-        app:dotCount="11"
-        app:splitWidth="30dp"
-        app:radius="100dp"
-        app:imgScale="half"
+        android:layout_marginTop="20dp"
+        app:circleStrokeWidth="5dp"
+        app:centerImg="@drawable/voice"
+        app:dotCount="10"
+        app:splitWidth="10dp"
+        app:radius="70dp"
+        app:bgColor="#aaaaaa"
+        app:imgScale="normal"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingEnd="20dp"
+        app:bgCorner="10dp"
         android:layout_gravity="center"
-        android:layout_width="300dp"
-        android:layout_height="300dp" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:src="@drawable/voice"
+        android:scaleType="centerCrop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <android.support.v7.widget.AppCompatSeekBar
         android:id="@+id/seekbar"
         android:layout_marginTop="20dp"

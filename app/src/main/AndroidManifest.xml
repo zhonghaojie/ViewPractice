@@ -20,7 +20,7 @@
         </activity>
         <activity android:name=".SecondActivity" />
         <activity android:name=".ThirdActivity" />
-        <activity android:name=".ForthActivity"></activity>
+        <activity android:name=".FourthActivity"></activity>
     </application>
 
 </manifest>
