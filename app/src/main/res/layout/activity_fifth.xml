@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.nhsoft.view.FifthActivity">
+
+    <com.nhsoft.view.widget.ProgressView
+        android:id="@+id/progress_view"
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:circleStrokeWidth="15dp"
+        app:txtColor="#2b2b2b"
+        app:txtSize="40sp"
+        app:radius="80dp" />
+    <Button
+        android:id="@+id/btn_start"
+        android:text="start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
